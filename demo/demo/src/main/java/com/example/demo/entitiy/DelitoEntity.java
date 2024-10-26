@@ -26,9 +26,7 @@ import java.time.LocalDate;
                 @StoredProcedureParameter(mode = ParameterMode.IN, name = "nombre_mes", type = String.class),
                 @StoredProcedureParameter(mode = ParameterMode.IN, name = "codigo_barrio", type = String.class),
                 @StoredProcedureParameter(mode = ParameterMode.IN, name = "nombre_barrio", type = String.class),
-                @StoredProcedureParameter(mode = ParameterMode.IN, name = "comuna", type = Byte.class),
-                @StoredProcedureParameter(mode = ParameterMode.IN, name = "latitud", type = Double.class),
-                @StoredProcedureParameter(mode = ParameterMode.IN, name = "longitud", type = Double.class)
+                @StoredProcedureParameter(mode = ParameterMode.IN, name = "comuna", type = Byte.class)
         }
 )
 public class DelitoEntity {
@@ -53,14 +51,13 @@ public class DelitoEntity {
     @Column(name = "franja")
     private byte franja;
 
-    @ManyToOne
-    @JoinColumn(name = "zona_afectada_id")
-    private ZonaAfectada zonaAfectada;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "barrio_id", nullable = false)
+    private Barrio barrio;
 
     @ManyToOne
-    @JoinColumn(name = "subtipo_id")
+    @JoinColumn(name = "subtipo_incidente_id")
     private SubtipoIncidente subtipoIncidente;
-
 
 
     @Column(name = "uso_arma")
@@ -68,11 +65,6 @@ public class DelitoEntity {
 
     @Column(name = "uso_moto")
     private boolean usoMoto;
-
-
-
-
-
 
     @Column(name = "cantidad")
     private short cantidad;

@@ -31,9 +31,7 @@ public class JobInsertData {
                                 delito.getMes(),
                                 delito.getBarrio(),
                                 delito.getBarrio(),
-                                delito.getComuna(),
-                                delito.getLatitud(),
-                                delito.getLongitud());
+                                delito.getComuna());
 
                     }
 

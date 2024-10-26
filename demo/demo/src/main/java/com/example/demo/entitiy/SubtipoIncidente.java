@@ -8,6 +8,7 @@ import lombok.Data;
 @Data
 public class SubtipoIncidente {
     @Id
+    @Column(name="subtipo_incidente_id")
     private int id;
     private String nombre;
     @ManyToOne

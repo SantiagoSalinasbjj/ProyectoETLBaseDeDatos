@@ -30,8 +30,7 @@ public class ExtractDataFromCSVService {
             delito.setDia(str[3]);
             delito.setFecha(LocalDate.parse(str[4]));
 
-            delito.setIdMapa(
-                    (NumberUtils.isCreatable(str[0]))?Integer.parseInt(str[0]):-1);
+
 
             delito.setAño(
                     (NumberUtils.isCreatable(str[1]))?Short.parseShort(str[1]):-1);
@@ -39,10 +38,7 @@ public class ExtractDataFromCSVService {
                     (NumberUtils.isCreatable(str[5]))?Byte.parseByte(str[5]):-1);
             delito.setComuna(
                     (NumberUtils.isCreatable(str[11]))?Byte.parseByte(str[11]):-1);
-            delito.setLatitud(
-                    (NumberUtils.isCreatable(str[12]))?Double.parseDouble(str[12]):-1);
-            delito.setLongitud(
-                    (NumberUtils.isCreatable(str[13]))?Double.parseDouble(str[13]):-1);
+
             delito.setCantidad(
                     (NumberUtils.isCreatable(str[14]))?Short.parseShort(str[14]):-1);
 

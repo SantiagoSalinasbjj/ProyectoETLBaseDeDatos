@@ -12,9 +12,11 @@ import java.util.List;
 public class Barrio {
 
     @Id
-    private String codigo;
+    @Column(name = "barrio_id")
+    private String id;
     private String barrio;
     private byte comuna;
-    @OneToMany(mappedBy = "barrio")
-    private List<ZonaAfectada> zonasAfectadas;
+    @OneToMany(mappedBy = "barrio", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private List<DelitoEntity> incidentes;
+
 }

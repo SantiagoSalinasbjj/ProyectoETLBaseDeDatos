@@ -10,7 +10,6 @@ import java.time.LocalDate;
 @Getter
 @Setter
 public class Delito {
-    private int idMapa;
     private short año;
     private String mes;
     private String dia;
@@ -22,14 +21,11 @@ public class Delito {
     private boolean usoMoto;
     private String barrio;
     private byte comuna;
-    private double latitud;
-    private double longitud;
     private short cantidad;
 
     @Override
     public String toString() {
         return "Delito{" +
-                "idMapa=" + idMapa +
                 ", año=" + año +
                 ", mes=" + mes +
                 ", dia=" + dia +
@@ -41,8 +37,6 @@ public class Delito {
                 ", usoMoto=" + usoMoto +
                 ", barrio='" + barrio + '\'' +
                 ", comuna=" + comuna +
-                ", latitud=" + latitud +
-                ", longitud=" + longitud +
                 ", cantidad=" + cantidad +
                 '}';
     }

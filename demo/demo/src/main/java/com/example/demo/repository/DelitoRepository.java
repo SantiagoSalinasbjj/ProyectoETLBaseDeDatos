@@ -24,9 +24,7 @@ public interface DelitoRepository extends JpaRepository<DelitoEntity,Integer> {
             @Param("nombre_mes") String nombreMes,
             @Param("codigo_barrio") String codigoBarrio,
             @Param("nombre_barrio") String nombreBarrio,
-            @Param("comuna") Byte comuna,
-            @Param("latitud") Double latitud,
-            @Param("longitud") Double longitud
+            @Param("comuna") Byte comuna
     );
 
 }
