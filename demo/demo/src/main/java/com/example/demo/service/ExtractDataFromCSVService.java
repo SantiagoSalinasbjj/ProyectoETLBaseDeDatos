@@ -6,13 +6,11 @@ import com.opencsv.CSVReaderBuilder;
 import org.apache.commons.lang3.math.NumberUtils;
 import org.springframework.stereotype.Service;
 
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.InputStreamReader;
-import java.io.Reader;
+import java.io.*;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.atomic.AtomicReference;
 
 @Service
 public class ExtractDataFromCSVService {
@@ -43,14 +41,16 @@ public class ExtractDataFromCSVService {
                     (NumberUtils.isCreatable(str[14]))?Short.parseShort(str[14]):-1);
 
 
-            delito.setTipo(str[6]);
-            delito.setSubtipo(str[7]);
+            delito.setTipo(
+                    (str[6]!=null&&!str[6].equals("NULL")?str[6]:"VACIO"));
+            delito.setSubtipo(
+                    (str[7]!=null&&!str[7].equals("NULL"))?str[7]:"VACIO");
             delito.setUsoArma(Boolean.parseBoolean(str[8]));
             delito.setUsoMoto(Boolean.parseBoolean(str[9]));
-            delito.setBarrio(str[10]);
+            delito.setBarrio((str[10]!=null&&!str[10].equals("NULL"))?str[10]:"VACIO");
             System.out.println(delito.toString());
 
-       /* if(Integer.parseInt(str[0].trim())==705609) {
+       /* if(Integer.parseInt(str[0].toString())==534813) {
             try {
                 FileOutputStream input = new FileOutputStream("test.txt");
                 String text = delito.toString();
@@ -63,7 +63,14 @@ public class ExtractDataFromCSVService {
 
         };*/
             delitos.add(delito); });
-
+        /*AtomicReference<Delito> del = new AtomicReference<>();
+        delitos.forEach(d->{if(d.getTipo().equals("VACIO")) try {
+            del.set(d);
+            throw new Exception("");
+        } catch (Exception e) {
+            System.out.println(del.toString());
+        }
+        });*/
         return delitos;
     }
 }

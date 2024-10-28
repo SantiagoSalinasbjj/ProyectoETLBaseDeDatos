@@ -26,7 +26,9 @@ import java.time.LocalDate;
                 @StoredProcedureParameter(mode = ParameterMode.IN, name = "nombre_mes", type = String.class),
                 @StoredProcedureParameter(mode = ParameterMode.IN, name = "codigo_barrio", type = String.class),
                 @StoredProcedureParameter(mode = ParameterMode.IN, name = "nombre_barrio", type = String.class),
-                @StoredProcedureParameter(mode = ParameterMode.IN, name = "comuna", type = Byte.class)
+                @StoredProcedureParameter(mode = ParameterMode.IN, name = "comuna", type = Byte.class),
+                @StoredProcedureParameter(mode = ParameterMode.IN, name = "tipo", type = String.class),
+                @StoredProcedureParameter(mode = ParameterMode.IN, name = "subtipo", type = String.class)
         }
 )
 public class DelitoEntity {

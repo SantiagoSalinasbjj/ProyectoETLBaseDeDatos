@@ -1,1 +1,1 @@
-Delito{idMapa=705609, aÃ±o=2016, mes=FEBRERO, dia=SABADO, fecha=2016-02-13, franja=0, tipo='Robo', subtipo='Robo total', usoArma=false, usoMoto=false, barrio='NULL', comuna=-1, latitud=-1.0, longitud=-1.0, cantidad=1}
+Delito{, año=2016, mes=DICIEMBRE, dia=MARTES, fecha=2016-12-06, franja=9, tipo='Robo', subtipo='Robo total', usoArma=false, usoMoto=false, barrio='VACIO', comuna=-1, cantidad=1}

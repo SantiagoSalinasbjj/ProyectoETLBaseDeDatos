@@ -31,11 +31,14 @@ public class JobInsertData {
                                 delito.getMes(),
                                 delito.getBarrio(),
                                 delito.getBarrio(),
-                                delito.getComuna());
+                                delito.getComuna(),
+                                delito.getTipo(),
+                                delito.getSubtipo()
+                        );
 
                     }
-
             );
+
         }
         catch(Exception ex){
                System.out.println(ex);
