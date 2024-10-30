@@ -1,7 +1,7 @@
 
 
+	USE BD_MULTIDIMENSIONAL;
 
-USE BD_MULTIDIMENSIONAL;
 
 INSERT INTO Lugar (Lugar_id, Nombre_Barrio, Comuna)
 SELECT 
@@ -12,7 +12,7 @@ FROM
     BD_PROYECTOBD.dbo.barrio;
 
 
-	INSERT INTO Tiempo (Tiempo_id, fecha, Hora, Nombre_Dia, Mes, Año)
+INSERT INTO Tiempo (Tiempo_id, fecha, Hora, Nombre_Dia, Mes, Año)
 SELECT 
     ROW_NUMBER() OVER (ORDER BY fecha, anio) AS Tiempo_id,  
     CAST(fecha AS DATETIME) AS fecha,
@@ -38,10 +38,9 @@ FROM
     BD_PROYECTOBD.dbo.incidente
 GROUP BY 
     fecha, nombre_dia, anio, nombre_mes;
-use BD_MULTIDIMENSIONAL;
 
 
-	INSERT INTO Tipo_Incidente (Tipo_incidente_id, Descripcion)
+INSERT INTO Tipo_Incidente (Tipo_incidente_id, Descripcion)
 SELECT 
     tipo_incidente_id AS Tipo_incidente_id,
     nombre AS Descripcion
@@ -49,12 +48,22 @@ FROM
     BD_PROYECTOBD.dbo.tipo_incidente;
 
 
-	INSERT INTO Incidente (id_incidente, Lugar_id, Tiempo_id, Tiempo_Lugar_id, Tipo_incidente_id)
+INSERT INTO Tiempo_Lugar (Tiempo_Lugar_id, Tiempo_id, Lugar_id)
+SELECT 
+    ROW_NUMBER() OVER (ORDER BY tiem.Tiempo_id, lug.Lugar_id) AS Tiempo_Lugar_id, 
+    tiem.Tiempo_id,
+    lug.Lugar_id
+FROM 
+    Tiempo tiem
+    CROSS JOIN Lugar lug;
+
+
+INSERT INTO Incidente (id_incidente, Lugar_id, Tiempo_id, Tiempo_Lugar_id, Tipo_incidente_id)
 SELECT 
     inc.id_incidente AS id_incidente,
     bar.barrio_id AS Lugar_id, 
     tiem.Tiempo_id AS Tiempo_id,
-    NULL AS Tiempo_Lugar_id,  
+    tl.Tiempo_Lugar_id AS Tiempo_Lugar_id,  
     tipo.Tipo_incidente_id AS Tipo_incidente_id
 FROM 
     BD_PROYECTOBD.dbo.incidente inc
@@ -62,16 +71,6 @@ FROM
     JOIN BD_PROYECTOBD.dbo.tipo_incidente tipo ON sub.tipo_id = tipo.tipo_incidente_id
     JOIN BD_PROYECTOBD.dbo.barrio bar ON inc.barrio_id = bar.barrio_id
     JOIN Lugar lug ON lug.Lugar_id = bar.barrio_id
-    JOIN Tiempo tiem ON tiem.fecha = inc.fecha AND tiem.Año = inc.anio AND tiem.Nombre_Dia = inc.nombre_dia;
+    JOIN Tiempo tiem ON tiem.fecha = inc.fecha AND tiem.Año = inc.anio AND tiem.Nombre_Dia = inc.nombre_dia
+    JOIN Tiempo_Lugar tl ON tl.Tiempo_id = tiem.Tiempo_id AND tl.Lugar_id = lug.Lugar_id;
 
-
-
-
-	INSERT INTO Tiempo_Lugar (Tiempo_Lugar_id, Tiempo_id, Lugar_id)
-SELECT 
-    ROW_NUMBER() OVER (ORDER BY tiem.Tiempo_id, lug.Lugar_id) AS Tiempo_Lugar_id, 
-    tiem.Tiempo_id,
-    lug.Lugar_id
-FROM 
-    Tiempo tiem
-    CROSS JOIN Lugar lug;  
