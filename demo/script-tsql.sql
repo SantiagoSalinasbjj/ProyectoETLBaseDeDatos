@@ -1,6 +1,4 @@
-
-
-	USE BD_MULTIDIMENSIONAL;
+USE BD_MULTIDIMENSIONAL;
 
 
 INSERT INTO Lugar (Lugar_id, Nombre_Barrio, Comuna)
@@ -58,13 +56,15 @@ FROM
     CROSS JOIN Lugar lug;
 
 
-INSERT INTO Incidente (id_incidente, Lugar_id, Tiempo_id, Tiempo_Lugar_id, Tipo_incidente_id)
+INSERT INTO Incidente (id_incidente, Lugar_id, Tiempo_id, Tiempo_Lugar_id, Tipo_incidente_id, uso_arma, uso_moto)
 SELECT 
     inc.id_incidente AS id_incidente,
     bar.barrio_id AS Lugar_id, 
     tiem.Tiempo_id AS Tiempo_id,
     tl.Tiempo_Lugar_id AS Tiempo_Lugar_id,  
-    tipo.Tipo_incidente_id AS Tipo_incidente_id
+    tipo.Tipo_incidente_id AS Tipo_incidente_id,
+    inc.uso_arma AS uso_arma,   
+    inc.uso_moto AS uso_moto    
 FROM 
     BD_PROYECTOBD.dbo.incidente inc
     JOIN BD_PROYECTOBD.dbo.subtipo_incidente sub ON inc.subtipo_incidente_id = sub.subtipo_incidente_id
@@ -73,4 +73,3 @@ FROM
     JOIN Lugar lug ON lug.Lugar_id = bar.barrio_id
     JOIN Tiempo tiem ON tiem.fecha = inc.fecha AND tiem.Año = inc.anio AND tiem.Nombre_Dia = inc.nombre_dia
     JOIN Tiempo_Lugar tl ON tl.Tiempo_id = tiem.Tiempo_id AND tl.Lugar_id = lug.Lugar_id;
-
