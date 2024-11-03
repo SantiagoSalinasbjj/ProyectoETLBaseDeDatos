@@ -45,8 +45,8 @@ public class ExtractDataFromCSVService {
                     (str[6]!=null&&!str[6].equals("NULL")?str[6]:"VACIO"));
             delito.setSubtipo(
                     (str[7]!=null&&!str[7].equals("NULL"))?str[7]:"VACIO");
-            delito.setUsoArma(Boolean.parseBoolean(str[8]));
-            delito.setUsoMoto(Boolean.parseBoolean(str[9]));
+            delito.setUsoArma(("SI".equalsIgnoreCase(str[8])));
+            delito.setUsoMoto(("SI".equalsIgnoreCase(str[9])));
             delito.setBarrio((str[10]!=null&&!str[10].equals("NULL"))?str[10]:"VACIO");
             System.out.println(delito.toString());
 
